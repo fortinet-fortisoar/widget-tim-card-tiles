@@ -1,0 +1,354 @@
+/***************************************************************/
+/* Added several comments to help for any future modifications */
+/***************************************************************/
+
+/* Main container - Fixed height */
+.card-tiles-ti-container {
+  width: 253px;
+  height: 380px;  /* Fixed total card height */
+  min-height: 380px;
+  max-height: 380px;
+  float: left;
+  margin: 20px 20px 0px 0px;
+  border-radius: 10px;
+  position: relative;
+  border-left: 2px solid;
+  opacity: 0.8;
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.card-tiles-ti-container:hover {
+  opacity: 1;
+}
+
+.card-tiles-ti-container:hover .delete-icon-container {
+  display: block;
+}
+
+.delete-icon-container:hover {
+  color: #da393d;
+}
+
+.delete-icon-container {
+  right: 5px;
+  top: 5px;
+  display: none;
+  position: absolute;
+  z-index: 10;
+  pointer-events: all;
+}
+
+/* TITLE */
+.card-tiles-ti-content-type {
+  /* Fixed dimensions */
+  height: 60px; /* 3 lines × 20px */
+  min-height: 60px;
+  max-height: 60px;
+  flex-shrink: 0; /* Prevent flex from shrinking */
+  flex-grow: 0; /* Prevent flex from growing */
+  /* White text */
+  color: #FFFFFF !important;
+  font-size: 14px;
+  line-height: 20px; /* 20px per line */
+  font-weight: 600;
+  /* Text truncation */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* Spacing */
+  margin-bottom: 5px;
+  padding-bottom: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.028);
+}
+
+.card-tiles-ti-content-type .new-truncate-ellipsis,
+.card-tile-title .new-truncate-ellipsis {
+  display: unset;
+}
+
+.card-tiles-ti-content-type .new-truncate-ellipsis>*,
+.card-tile-title .new-truncate-ellipsis>* {
+  overflow: unset;
+}
+
+.card-tiles-ti-content-type .line-height-normal {
+  line-height: 20px !important;
+}
+
+.card-tile-ti-title {
+  font-size: 17px;
+  height: 50px;
+  min-height: 50px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-tiles-ti-content {
+  padding: 12px 15px;
+  position: relative;
+  height: 100%; /* Fill container */
+  box-sizing: border-box;
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack vertically */
+}
+
+.card-content-fixed-height {
+  min-height: 700px;
+}
+
+.card-tiles-ti-details {
+  font-size: 12px;
+  padding-top: 8px;
+}
+
+.card-tiles-ti-header-title {
+  font-size: 10px;
+  padding-top: 8px;
+}
+
+.card-single-details {
+  display: inline-block;
+}
+
+/* Published Date */
+.card-tiles-ti-published {
+  height: 12px; /* 6 lines × 16px */
+  min-height: 12px;
+  max-height: 12px;
+  overflow: hidden;
+  color: #c5d5e8;
+  font-size: 12px;
+  line-height: 12px;
+  margin: 10px 0 0 0;
+}
+
+/* News Description (cardDetails) - 3 lines max, compact */
+.card-tiles-ti-description {
+  height: 96px; /* 6 lines × 16px */
+  min-height: 96px;
+  max-height: 96px;
+  overflow: hidden;
+  color: #c5d5e8;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 5px 0 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 3 lines */
+  -webkit-box-orient: vertical;
+}
+
+/* URL section - Single line, minimal space */
+.card-tiles-ti-description .card-tiles-ti-url,
+.card-tiles-ti-url {
+  height: 16px; /* Single line */
+  min-height: unset;
+  max-height: 16px;
+  overflow: hidden;
+  color: #8a9bb8;
+  font-size: 11px; /* Slightly smaller */
+  line-height: 16px;
+  margin: 5px 0 0 0; /* Tight margin */
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Single line */
+  -webkit-box-orient: vertical;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card-tiles-ti-image-container .icon-big {
+  font-size: 85px;
+}
+
+.card-tiles-ti-refresh-icon {
+  border-left: 2px solid;
+  border-right: 2px solid;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+/* NEW - Vulnerability Intel */
+.card-tiles-ti-rect {
+    border-radius: 6px;
+    padding: 2px;
+    margin-bottom: 8px;
+}
+
+.card-tiles-ti-rect-header {
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.card-tiles-ti-rect-details {
+    background-color: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.card-tiles-ti-rect:last-child {
+    margin-bottom: 0;
+}
+
+.cvss-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 40px;
+    text-align: center;
+}
+
+.epss-inline {
+  display: flex;
+  align-items: baseline;
+}
+
+.epss-label {
+  margin-right: 12px;
+}
+
+.epss-value {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+/* NEW - Vulnerability Intel */
+
+/* Article Image - Compact */
+.card-tiles-ti-image-top {
+  width: 100%; 
+  height: 120px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin: 0;
+  padding: 0;
+  background: #111;
+  line-height: 0;
+  font-size: 0; 
+}
+
+.card-tiles-ti-image-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Article Image Section - 0 gaps */
+.card-tiles-image-section {
+  height: 120px;
+  min-height: 120px;
+  max-height: 120px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-bottom: 5px;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.card-tiles-image-section .card-tiles-ti-details {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* URL Rectangle - Rounded corners container */
+.card-tiles-ti-url-rect {
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-top: 10px;
+    height: auto;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;  /* text size */
+    color: #FFFFFF !important;
+}
+
+.card-tiles-ti-url-rect p {
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #FFFFFF !important;
+}
+
+/* Override any inherited text colors in card header */
+.card-tiles-ti-content-type,
+.card-tiles-ti-content-type span,
+.card-tiles-ti-content-type div,
+.card-tiles-ti-content-type a,
+.card-tiles-ti-content-type p {
+    color: #FFFFFF !important;
+}
+
+/* Override any inherited text colors in URL rect */
+.card-tiles-ti-url-rect,
+.card-tiles-ti-url-rect span,
+.card-tiles-ti-url-rect div,
+.card-tiles-ti-url-rect a,
+.card-tiles-ti-url-rect p {
+    color: #FFFFFF !important;
+}
+
+
+/* Testing the conditional Description */
+/* Rich Text Rendering (Threat Intel) */
+.richtext-content {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0;
+    color: #c5d5e8;
+    font-size: 12px;
+    line-height: 16px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* Normalize inner HTML tags */
+.richtext-content p,
+.richtext-content div,
+.richtext-content span,
+.richtext-content blockquote {
+    background: transparent !important;
+    color: inherit !important;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+/* Threat Intel parsed output */
+.card-tiles-ti-description .ti-parsed,
+.card-tiles-ti-description .ti-parsed * {
+  background: transparent !important;
+  color: inherit !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Paragraph spacing */
+.card-tiles-ti-description .ti-parsed p {
+  margin-bottom: 6px;
+}
+
+/* SecNews plain text */
+.card-tiles-ti-description .news-plain {
+  background: transparent !important;
+  white-space: normal;
+  word-break: break-word;
+}
+
+

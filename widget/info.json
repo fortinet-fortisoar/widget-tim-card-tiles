@@ -1,0 +1,20 @@
+{
+    "name": "timCardTiles",
+    "version": "1.0.0",
+    "title": "TIM Card Tiles",
+    "subTitle": "Card Tiles for Threat Intel Module",
+    "metadata": {
+        "pages": [
+            "View Panel",
+            "Listing"
+        ],
+        "category": [],
+        "certified": "Yes",
+        "publisher": null,
+        "description": "A new version of Card Tiles suitable for Threat Intel Module",
+        "compatibility": [
+            "7.6.4"
+        ]
+    },
+    "development": false
+}
