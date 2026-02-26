@@ -1,0 +1,133 @@
+<!-- Copyright start
+    MIT License
+    Copyright (c) 2026 Fortinet Inc
+Copyright end -->
+<link rel="stylesheet" type="text/css" href="timCardTiles-1.0.0/widgetAssets/css/cardTiles.css" />
+<div class="widget-container chart">
+    <div class="display-flex-space-between margin-chart">
+        <div class="padding-right-0 padding-left-0 widget-dashboard-title-width"
+            data-ng-class="(page === 'dashboard' || page === 'reporting') ? 'widget-dashboard-title-width' : 'widget-title-width'">
+            <h5 data-ng-if="config.title !==''" class="padding-left-lg margin-top-0 margin-bottom-0 text-overflow">{{config.title}}</h5>
+        </div>
+        <div class="padding-right-0 padding-left-0"
+            data-ng-class="(page === 'dashboard' || page === 'reporting') ? 'widget-dashboard-actions-width' : 'widget-actions-width'">
+            <span class="fa btn widget-action-icon btn-sm pull-right" data-ng-click="collapsed = !collapsed"
+                data-ng-class="{'fa-caret-up': !collapsed, 'fa-caret-down': collapsed}"></span>
+        </div>
+    </div>
+    <div data-ng-hide="collapsed">
+        <div class="padding-left-lg padding-bottom-xlg overflow-hidden">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="padding-right-lg">
+                        <div class="pull-left">
+                            <span class="font-size-12 muted">Showing {{fieldRows.length}} Results</span>
+                            <span
+                                data-ng-style="{'border-left-color':cardTilesThemeColor.cardIconSeparator,'border-right-color':cardTilesThemeColor.cardIconSeparator }"
+                                data-ng-hide="page === 'dashboard' || page === 'reporting'" id="cardTilesRefreshIcon"
+                                class="icon icon-refresh btn btn-sm display-inline-block card-tiles-refresh-icon"
+                                data-ng-click="getList();" data-uib-tooltip="Refresh"></span>
+
+                        </div>
+                        <div class="pull-left">
+                            <form class="width-300px" data-ng-submit="getList()" name="cardTilesSearchForm" novalidate>
+                                <div class="input-group search-style">
+                                    <input type="text" class="form-control" placeholder="Search"
+                                        aria-labelledby="search-btn" data-ng-model="config.query.search">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default" aria-label="Search"
+                                            id="search-card-tiles-by-text-btn"><span
+                                                class="icon icon-search"></span></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="mertics-widget-border-bottom padding-bottom-md"></div>
+            <div style="height:600px" data-ng-if="!processing && (fieldRows.length > 0)">
+                <div id="cardTileOpenRecordLink" data-ng-repeat="record in fieldRows" class="card-tiles-ti-container"
+                    data-ng-click="openRecord(config.module, record['@id'].value)" role="button" tabindex="0"
+                    data-ng-style="{'border-left-color':record[config.mapping.cardLeftBorder].value.color || cardTilesThemeColor.cardBorderLeftColor, 'background': cardTilesThemeColor.cardBackgroundColor}">
+
+                    <div class="card-tiles-ti-content">
+                        
+                        <!-- TITLE --> 
+                        <div data-ng-if="config.mapping.cardTitle"
+                            class="card-tiles-ti-content-type font-size-14 margin-bottom-sm"
+                            data-cs-view-field="record[config.mapping.cardTitle]">
+                        </div>
+                        
+                        <!-- IMAGE --> 
+                        <div class="card-tiles-ti-rect card-tiles-image-section">
+                            <div class="card-tiles-ti-details">                                
+                                <div class="margin-0"> <!-- title="{{record[config.mapping.subtitle3].title}}"> -->
+                                    <div class="card-tiles-ti-image-top" data-ng-if="record[config.mapping.subtitle3]">
+                                        <img data-ng-src="{{record[config.mapping.subtitle3].value}}" 
+                                            alt="Article Image"
+                                            onerror="this.style.display='none'">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SecNewsData Descrition -->
+                        <!-- <div class="card-tiles-ti-description muted-80" >
+                            <p title="{{record[config.mapping.cardDetails].title}}"
+                                data-cs-view-field="record[config.mapping.cardDetails]"></p>
+                        </div> -->
+
+                        <!-- DESCRIPTION - Takes care of both scenarios:-->
+                        <!-- 1 The "threat_intel_reports.summary" has a JSON content and the algorithm-->
+                        <!--   needs to parse and extract only the parts between the <p>..</p>-->
+                        <!-- 2 The "sec_news_datas.news_text" is just plain text-->
+                        <div class="card-tiles-ti-description muted-80">
+                            <!-- Threat Intel: parse <p> only -->
+                            <div
+                                ng-if="(config.module || '').toLowerCase() === 'threat_intel_reports'
+                                    && record[config.mapping.cardDetails]
+                                    && record[config.mapping.cardDetails].value"
+                                class="ti-parsed"
+                                ng-bind-html="extractParagraphs(record[config.mapping.cardDetails].value)">
+                            </div>
+                            <!-- SecNewsData: plain text -->
+                            <div
+                                ng-if="(config.module || '').toLowerCase() === 'cybersecurity_news'
+                                    && record[config.mapping.cardDetails]
+                                    && record[config.mapping.cardDetails].value"
+                                class="news-plain"
+                                ng-bind="record[config.mapping.cardDetails].value">
+                            </div>
+                        </div>
+
+                        <!-- Published Date -->
+                        <div class="card-tiles-ti-published" >
+                            <p title="{{record[config.mapping.subtitle2].title}}"
+                                data-cs-view-field="record[config.mapping.subtitle2]">
+                            </p>
+                        </div>
+
+                        <!-- Tags - Inside rounded rectangle -->
+                        <div class="card-tiles-ti-url-rect">
+                            <p title="{{record[config.mapping.tags].title}}"
+                                data-cs-view-field="record[config.mapping.tags]">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="watermark" data-ng-if="!processing && (!fieldRows || fieldRows.length === 0)">No Records Found
+            </div>
+            <div class="padding-top-sm padding-right-md padding-bottom-sm padding-left-md " data-ng-if="processing">
+                <cs-spinner data-show-background="true"></cs-spinner>
+            </div>
+        </div>
+    </div>
+    <div data-ng-show="!processing && unauthorized" class="unauthorized-message">
+        <h6 class="text-center padding-top-lg padding-bottom-lg font200 font-size-15">You do not have necessary
+            permission for {{ config.module | titlecase }}.</h6>
+    </div>
+</div>
