@@ -91,7 +91,7 @@ Copyright end -->
                                     && record[config.mapping.cardDetails]
                                     && record[config.mapping.cardDetails].value"
                                 class="ti-parsed"
-                                ng-bind-html="extractParagraphs(record[config.mapping.cardDetails].value)">
+                                data-ng-bind-html="extractParagraphs(record[config.mapping.cardDetails].value)">
                             </div>
                             <!-- SecNewsData: plain text -->
                             <div
@@ -99,7 +99,7 @@ Copyright end -->
                                     && record[config.mapping.cardDetails]
                                     && record[config.mapping.cardDetails].value"
                                 class="news-plain"
-                                ng-bind="record[config.mapping.cardDetails].value">
+                                data-ng-bind-html="record[config.mapping.cardDetails].value">
                             </div>
                         </div>
 
